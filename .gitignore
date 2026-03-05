@@ -4,3 +4,4 @@ chroma_qwen_db
 downloads
 .env
 __pycache__/
+node_modules
