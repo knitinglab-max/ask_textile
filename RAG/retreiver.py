@@ -10,7 +10,7 @@ def get_retriver():
         embedding_function=embeddings,
         persist_directory="./chroma_qwen_db"
     )
-    main_retriever = vectorstore.as_retriever(search_type= "similarity", search_kwarg = {"k":2})
+    main_retriever = vectorstore.as_retriever(search_type= "similarity", search_kwargs = {"k":2})
 
     return main_retriever
 
