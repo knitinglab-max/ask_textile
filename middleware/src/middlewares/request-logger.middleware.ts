@@ -73,7 +73,8 @@ export const requestLoggerMiddleware = (
   }
 
   // Override res.end to log response summary (duration updated when response finishes)
-  res.end = function (...args: any[]) {
+  const existingEnd = res.end;
+  (res.end as any) = function (...args: any[]) {
     const duration = Date.now() - startTime;
 
     logger.info(
@@ -96,7 +97,7 @@ export const requestLoggerMiddleware = (
       );
     }
 
-    return originalEnd.apply(res, args);
+    return existingEnd.apply(res, args as [any, any, any]);
   };
 
   next();
