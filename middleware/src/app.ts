@@ -1,5 +1,6 @@
 import express from "express";
 import authRoutes from "./modules/auth/auth.routes";
+import chatRoutes from "./modules/chat/chat.routes";
 import { errorMiddleware } from "./middlewares/error.middleware";
 import { corsConfig } from "./config/cors";
 import {
@@ -18,6 +19,7 @@ app.use(bodyParsingErrorHandler);
 app.use(requestLoggerMiddleware);
 
 app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/chat", chatRoutes);
 
 //! Global error handler (ALWAYS LAST)
 app.use(errorMiddleware);

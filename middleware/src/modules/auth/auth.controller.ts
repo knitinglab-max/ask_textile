@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { AuthService } from "./auth.service";
 import { logger } from "../../utils/logger";
+import { AppError } from "../../utils/AppError";
 import {
   RegisterRequest,
   LoginRequest,
@@ -75,6 +76,9 @@ export class AuthController {
    */
   static async logout(req: Request, res: Response) {
     const userId = req.userId;
+    if (!userId) {
+      throw new AppError("Unauthorized", 401);
+    }
     const authHeader = req.headers.authorization;
     const token = authHeader?.split(" ")[1] || "";
 
@@ -112,6 +116,9 @@ export class AuthController {
    */
   static async getCurrentUser(req: Request, res: Response) {
     const userId = req.userId;
+    if (!userId) {
+      throw new AppError("Unauthorized", 401);
+    }
 
     logger.info({ userId }, "[AUTH] Get current user endpoint called");
 
